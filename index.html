@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Бизнес-анализ в 5 шагов с Контур.Компасом</title>
+    <link rel="icon" href="https://kontur.ru/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="compass-128.png" alt="Контур.Компас" class="logo">
+        <h1>Бизнес-анализ в 5 шагов с Контур.Компасом</h1>
+        <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </header>
+    <main>
+        <section id="company-info">
+            <h2>Информация о компании</h2>
+            <div class="form-group">
+                <label for="company_name">Наименование организации:</label>
+                <input type="text" id="company_name" name="company_name" required>
+            </div>
+        </section>
+        <section id="about">
+            <h2>Что такое Контур.Компас?</h2>
+            <p class="black-text">Контур.Компас — это сервис для точного поиска и анализа организаций: клиентов, поставщиков, партнеров, спонсоров. Компас помогает отделам продаж эффективнее работать с существующими клиентами и находить новых благодаря детальной информации об организациях и прорабатывать новые маркетинговые стратегии и гипотезы для привлечения входящего трафика.</p>
+            <p class="black-text">Процесс состоит из 5 простых шагов. Ваша честность и точность при заполнении формы позволит провести наиболее эффективную встречу!</p>
+        </section>
+        <section id="form">
+            <h2>Заполните форму для предварительной презентации</h2>
+            <form id="surveyForm">
+                <section>
+                    <h3>Какие каналы продаж сейчас используете для поиска НОВЫХ клиентов?</h3>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="sales_advertising" name="sales_channels[]" value="Реклама">
+                        <label for="sales_advertising">Реклама</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="sales_calls" name="sales_channels[]" value="Звонки">
+                        <label for="sales_calls">Звонки</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="sales_emails" name="sales_channels[]" value="Рассылки">
+                        <label for="sales_emails">Рассылки</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="sales_other" name="sales_channels[]" value="Другое">
+                        <label for="sales_other">Другое</label>
+                        <input type="text" class="other-input" name="sales_channels_other" placeholder="Укажите свой вариант">
+                    </div>
+                </section>
+                <section>
+                    <h3>Из тех каналов продаж, что перечислили, что хотелось бы улучшить?</h3>
+                    <div class="sub-options advertising">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="ad_lead_quantity" name="advertising_improvements[]" value="Количество получаемых лидов с сайта">
+                            <label for="ad_lead_quantity">Количество получаемых лидов с сайта</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="ad_lead_quality" name="advertising_improvements[]" value="Качество полученных лидов с сайта">
+                            <label for="ad_lead_quality">Качество полученных лидов с сайта</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="ad_lead_cost" name="advertising_improvements[]" value="Сокращение стоимости лида">
+                            <label for="ad_lead_cost">Сокращение стоимости лида</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="ad_audience_warming" name="advertising_improvements[]" value="Прогрев аудитории">
+                            <label for="ad_audience_warming">Прогрев аудитории</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="ad_yandex_top" name="advertising_improvements[]" value="Выдача в топе Яндекса">
+                            <label for="ad_yandex_top">Выдача в топе Яндекса</label>
+                        </div>
+                    </div>
+                    <div class="sub-options calls">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="calls_decision_makers" name="calls_improvements[]" value="Дозвон лицам принимающим решения в компании">
+                            <label for="calls_decision_makers">Дозвон лицам, принимающим решения в компании</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="calls_methodologies" name="calls_improvements[]" value="Методологии для отделов продаж">
+                            <label for="calls_methodologies">Методологии для отделов продаж</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="calls_counterparties" name="calls_improvements[]" value="Анализ текущих контрагентов">
+                            <label for="calls_counterparties">Анализ текущих контрагентов</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="calls_time_reduction" name="calls_improvements[]" value="Сокращение времени на проработку компаний">
+                            <label for="calls_time_reduction">Сокращение времени на проработку компаний</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="calls_segmentation" name="calls_improvements[]" value="Сегментация клиентов по приоритетам (финансы, отрасль, доп. критерии)">
+                            <label for="calls_segmentation">Сегментация клиентов по приоритетам (финансы, отрасль, доп. критерии)</label>
+                        </div>
+                    </div>
+                    <div class="sub-options emails">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="emails_time_reduction" name="emails_improvements[]" value="Сокращение времени на поиск НОВЫХ компаний под Email-маркетинг">
+                            <label for="emails_time_reduction">Сокращение времени на поиск НОВЫХ компаний под Email-маркетинг</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="emails_robocalls" name="emails_improvements[]" value="Роботизированный обзвон">
+                            <label for="emails_robocalls">Роботизированный обзвон</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="emails_leadgen" name="emails_improvements[]" value="Лидогенерация путем колл-центра">
+                            <label for="emails_leadgen">Лидогенерация путем колл-центра</label>
+                        </div>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="improve_other" name="improve_channels[]" value="Другое">
+                        <label for="improve_other">Другое</label>
+                        <input type="text" class="other-input" id="improve_other_input" name="improve_channels_other" placeholder="Укажите свой вариант">
+                    </div>
+                </section>
+                <section>
+                    <h3>Расставьте ответы по приоритетности</h3>
+                    <ul class="sortable-improvements" name="improvement_priorities[]"></ul>
+                </section>
+                <section>
+                    <h3>Расставьте в приоритете задачи вашей компании, которые являются важными для вас в ближайшие 6–12 месяцев</h3>
+                    <ul class="sortable" name="priorities[]">
+                        <li data-value="Увеличение объема продаж">Увеличение объема продаж <span class="drag-handle">↕</span></li>
+                        <li data-value="Оптимизация бизнес-процессов">Оптимизация бизнес-процессов <span class="drag-handle">↕</span></li>
+                        <li data-value="Расширение клиентской базы">Расширение клиентской базы <span class="drag-handle">↕</span></li>
+                        <li data-value="Внедрение новых технологий">Внедрение новых технологий <span class="drag-handle">↕</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Какие новые идеи вы хотите внедрить в ваш бизнес?</h3>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="idea_advertising" name="new_ideas[]" value="Реклама">
+                        <label for="idea_advertising">Реклама</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="idea_calls" name="new_ideas[]" value="Звонки">
+                        <label for="idea_calls">Звонки</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="idea_emails" name="new_ideas[]" value="Рассылки">
+                        <label for="idea_emails">Рассылки</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="idea_call_center" name="new_ideas[]" value="Колл-центр">
+                        <label for="idea_call_center">Колл-центр</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="idea_robocalls" name="new_ideas[]" value="Роботизированный обзвон">
+                        <label for="idea_robocalls">Роботизированный обзвон</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="idea_other" name="new_ideas[]" value="Ваши идеи">
+                        <label for="idea_other">Ваши идеи</label>
+                        <input type="text" class="other-input" id="idea_other_input" name="new_ideas_other" placeholder="Укажите свои идеи">
+                    </div>
+                </section>
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025</p>
+    </footer>
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h3>Успех!</h3>
+            <p>Форма успешно отправлена.</p>
+            <button onclick="document.getElementById('successModal').style.display='none'">Закрыть</button>
+        </div>
+    </div>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

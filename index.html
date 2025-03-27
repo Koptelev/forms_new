@@ -26,7 +26,16 @@
         <section id="about">
             <h2>Что такое Контур.Компас?</h2>
             <p class="black-text">Контур.Компас — это сервис для точного поиска и анализа организаций: клиентов, поставщиков, партнеров, спонсоров. Компас помогает отделам продаж эффективнее работать с существующими клиентами и находить новых благодаря детальной информации об организациях и прорабатывать новые маркетинговые стратегии и гипотезы для привлечения входящего трафика.</p>
-            <p class="black-text">Процесс состоит из 5 простых шагов. Ваша честность и точность при заполнении формы позволит провести наиболее эффективную встречу!</p>
+            <p class="black-text">Чтобы максимально точно подобрать информацию о вашей компании и предложить наиболее релевантные решения, заполните эту форму. Это займет всего несколько минут, но позволит сделать презентацию максимально полезной и персонализированной.</p>
+            <p class="black-text">Процесс состоит из 5 простых шагов:</p>
+            <ul class="black-text">
+                <li>Основная информация о компании</li>
+                <li>Рынок и конкуренты</li>
+                <li>Продажи и клиенты</li>
+                <li>Бухгалтерская отчетность</li>
+                <li>Дополнительные данные</li>
+            </ul>
+            <p class="black-text">Ваша честность и точность при заполнении формы позволят получить наиболее качественные рекомендации!</p>
         </section>
         <section id="form">
             <h2>Заполните форму для предварительной презентации</h2>
@@ -48,7 +57,7 @@
                     <div class="checkbox-container">
                         <input type="checkbox" id="sales_other" name="sales_channels[]" value="Другое">
                         <label for="sales_other">Другое</label>
-                        <input type="text" class="other-input" name="sales_channels_other" placeholder="Укажите свой вариант">
+                        <textarea class="expandable-textarea other-input" name="sales_channels_other" placeholder="Укажите свой вариант"></textarea>
                     </div>
                 </section>
                 <section>
@@ -114,7 +123,7 @@
                     <div class="checkbox-container">
                         <input type="checkbox" id="improve_other" name="improve_channels[]" value="Другое">
                         <label for="improve_other">Другое</label>
-                        <input type="text" class="other-input" id="improve_other_input" name="improve_channels_other" placeholder="Укажите свой вариант">
+                        <textarea class="expandable-textarea other-input" id="improve_other_input" name="improve_channels_other" placeholder="Укажите свой вариант"></textarea>
                     </div>
                 </section>
                 <section>
@@ -155,7 +164,7 @@
                     <div class="checkbox-container">
                         <input type="checkbox" id="idea_other" name="new_ideas[]" value="Ваши идеи">
                         <label for="idea_other">Ваши идеи</label>
-                        <input type="text" class="other-input" id="idea_other_input" name="new_ideas_other" placeholder="Укажите свои идеи">
+                        <textarea class="expandable-textarea other-input" id="idea_other_input" name="new_ideas_other" placeholder="Укажите свои идеи"></textarea>
                     </div>
                 </section>
                 <button type="submit">Отправить</button>

@@ -243,6 +243,13 @@ form input[type="checkbox"]:checked + label + .other-input {
     display: block;
 }
 
+.expandable-textarea {
+    min-height: 40px;
+    resize: none; /* Запрещаем ручное изменение размера */
+    overflow: hidden; /* Убираем скроллбар */
+    line-height: 1.5;
+}
+
 .sub-options {
     margin-left: 30px;
     display: none;
@@ -377,7 +384,7 @@ footer {
 .sortable li, .sortable-improvements li {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start; /* Изменено с center на flex-start для многострочного текста */
     padding: 10px;
     margin: 5px 0;
     background-color: var(--input-bg);
@@ -386,6 +393,13 @@ footer {
     cursor: move;
     color: var(--text-color);
     transition: background-color 0.3s ease;
+}
+
+.sortable li .text-content, .sortable-improvements li .text-content {
+    flex: 1; /* Текст занимает доступное пространство */
+    white-space: normal; /* Перенос текста */
+    word-wrap: break-word; /* Перенос длинных слов */
+    margin-right: 10px; /* Отступ от drag-handle */
 }
 
 .sortable li:hover, .sortable-improvements li:hover {
@@ -409,4 +423,5 @@ footer {
     font-size: 1.2em;
     color: #ff5555;
     cursor: grab;
+    flex-shrink: 0; /* Предотвращаем сжатие ручки */
 }

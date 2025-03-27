@@ -22,7 +22,7 @@ document.getElementById('surveyForm').addEventListener('submit', function(event)
     ];
 
     otherFields.forEach(field => {
-        const otherInput = document.querySelector(`input[name="${field.input}"]`);
+        const otherInput = document.querySelector(`textarea[name="${field.input}"]`);
         if (otherInput && otherInput.value && data[field.checkbox] && data[field.checkbox].includes(field.checkbox === 'new_ideas' ? 'Ваши идеи' : 'Другое')) {
             data[field.checkbox] = data[field.checkbox].filter(v => v !== (field.checkbox === 'new_ideas' ? 'Ваши идеи' : 'Другое'));
             data[field.checkbox].push(otherInput.value);
@@ -59,7 +59,7 @@ document.getElementById('surveyForm').addEventListener('submit', function(event)
     this.reset();
 });
 
-// Функция для обновления опций во втором вопросе и третьем вопросе
+// Функция для обновления опций во втором вопросе
 function updateSecondQuestionOptions() {
     const selectedChannels = Array.from(document.querySelectorAll('input[name="sales_channels[]"]:checked'))
         .map(checkbox => checkbox.value);
@@ -82,7 +82,7 @@ function updateSecondQuestionOptions() {
         }
     });
 
-    // "Другое" всегда видимо, независимо от выбора в первом вопросе
+    // "Другое" всегда видимо
     const otherCheckboxContainer = document.querySelector('input[name="improve_channels[]"][value="Другое"]').closest('.checkbox-container');
     otherCheckboxContainer.style.display = 'flex';
 
@@ -105,32 +105,39 @@ function updateImprovementPriorities() {
     selectedImprovements.forEach(improvement => {
         const li = document.createElement('li');
         li.setAttribute('data-value', improvement);
-        li.innerHTML = `${improvement} <span class="drag-handle">↕</span>`;
+        li.innerHTML = `<span class="text-content">${improvement}</span><span class="drag-handle">↕</span>`;
         li.setAttribute('draggable', 'true');
         improvementsList.appendChild(li);
     });
+}
 
-    // Добавляем drag-and-drop для нового списка
+// Инициализация drag-and-drop для списков
+function initializeSortableList(list) {
     let draggedItem = null;
-    improvementsList.addEventListener('dragstart', (e) => {
+
+    list.addEventListener('dragstart', (e) => {
         draggedItem = e.target.closest('li');
-        draggedItem.classList.add('dragging');
+        if (draggedItem) {
+            draggedItem.classList.add('dragging');
+        }
     });
 
-    improvementsList.addEventListener('dragend', () => {
-        draggedItem.classList.remove('dragging');
-        draggedItem = null;
+    list.addEventListener('dragend', () => {
+        if (draggedItem) {
+            draggedItem.classList.remove('dragging');
+            draggedItem = null;
+        }
     });
 
-    improvementsList.addEventListener('dragover', (e) => {
+    list.addEventListener('dragover', (e) => {
         e.preventDefault();
     });
 
-    improvementsList.addEventListener('drop', (e) => {
+    list.addEventListener('drop', (e) => {
         e.preventDefault();
         const targetItem = e.target.closest('li');
-        if (targetItem && draggedItem !== targetItem) {
-            const allItems = Array.from(improvementsList.children);
+        if (targetItem && draggedItem && draggedItem !== targetItem && draggedItem.parentNode === targetItem.parentNode) {
+            const allItems = Array.from(list.children);
             const draggedIndex = allItems.indexOf(draggedItem);
             const targetIndex = allItems.indexOf(targetItem);
 
@@ -141,9 +148,20 @@ function updateImprovementPriorities() {
             }
         }
     });
+
+    // Устанавливаем draggable для всех существующих элементов
+    Array.from(list.children).forEach(item => {
+        item.setAttribute('draggable', 'true');
+    });
 }
 
-// Добавляем слушатели событий для всех чекбоксов первого и второго вопросов
+// Автоматическое расширение textarea
+function adjustTextareaHeight(textarea) {
+    textarea.style.height = 'auto'; // Сбрасываем высоту
+    textarea.style.height = `${textarea.scrollHeight}px`; // Устанавливаем высоту по содержимому
+}
+
+// Добавляем слушатели событий
 document.querySelectorAll('input[name="sales_channels[]"]').forEach(checkbox => {
     checkbox.addEventListener('change', updateSecondQuestionOptions);
 });
@@ -154,48 +172,43 @@ document.querySelectorAll('input[name="advertising_improvements[]"], input[name=
 
 document.querySelector('#improve_other_input').addEventListener('input', updateImprovementPriorities);
 
-// Drag-and-drop для сортировки приоритетов задач
+document.querySelectorAll('.expandable-textarea').forEach(textarea => {
+    textarea.addEventListener('input', function() {
+        adjustTextareaHeight(this);
+    });
+});
+
+// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
     const sortableList = document.querySelector('.sortable');
-    let draggedItem = null;
+    const sortableImprovementsList = document.querySelector('.sortable-improvements');
 
-    sortableList.addEventListener('dragstart', (e) => {
-        draggedItem = e.target.closest('li');
-        draggedItem.classList.add('dragging');
-    });
+    // Инициализируем drag-and-drop для статического списка задач
+    if (sortableList) {
+        initializeSortableList(sortableList);
+    }
 
-    sortableList.addEventListener('dragend', () => {
-        draggedItem.classList.remove('dragging');
-        draggedItem = null;
-    });
+    // Инициализируем drag-and-drop для динамического списка улучшений
+    if (sortableImprovementsList) {
+        initializeSortableList(sortableImprovementsList);
+    }
 
-    sortableList.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-
-    sortableList.addEventListener('drop', (e) => {
-        e.preventDefault();
-        const targetItem = e.target.closest('li');
-        if (targetItem && draggedItem !== targetItem) {
-            const allItems = Array.from(sortableList.children);
-            const draggedIndex = allItems.indexOf(draggedItem);
-            const targetIndex = allItems.indexOf(targetItem);
-
-            if (draggedIndex < targetIndex) {
-                targetItem.after(draggedItem);
-            } else {
-                targetItem.before(draggedItem);
-            }
-        }
-    });
-
-    // Делаем все элементы перетаскиваемыми
-    Array.from(sortableList.children).forEach(item => {
-        item.setAttribute('draggable', 'true');
-    });
-
-    // Инициализируем состояние
+    // Первоначальное обновление второго и третьего вопросов
     updateSecondQuestionOptions();
+
+    // Инициализация темы
+    const savedTheme = localStorage.getItem('theme');
+    const themeToggle = document.getElementById('themeToggle');
+    
+    if (savedTheme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+        document.querySelector('.theme-icon').textContent = '☀️';
+    } else {
+        document.body.removeAttribute('data-theme');
+        document.querySelector('.theme-icon').textContent = '🌙';
+    }
+    
+    themeToggle.addEventListener('click', toggleTheme);
 });
 
 // Функция для генерации Excel файла
@@ -244,19 +257,3 @@ function toggleTheme() {
         localStorage.setItem('theme', 'dark');
     }
 }
-
-// Проверяем сохраненную тему при загрузке
-document.addEventListener('DOMContentLoaded', function() {
-    const savedTheme = localStorage.getItem('theme');
-    const themeToggle = document.getElementById('themeToggle');
-    
-    if (savedTheme === 'dark') {
-        document.body.setAttribute('data-theme', 'dark');
-        document.querySelector('.theme-icon').textContent = '☀️';
-    } else {
-        document.body.removeAttribute('data-theme');
-        document.querySelector('.theme-icon').textContent = '🌙';
-    }
-    
-    themeToggle.addEventListener('click', toggleTheme);
-});
